@@ -1,0 +1,22 @@
+<form name="personForm" novalidate>
+  <label>Nom: </label><input type="text" name="name" ng-model="name" ng-pattern="/^[a-zA-Z- éèêîïôö]+$/" required /> <!--le ng-model permet de déclarer la valeur-->
+  <p class="validInput" ng-show="personForm.name.$dirty&&personForm.name.$valid">Le nom est bon</p> <!--dirty permet de detecter les changements a l'input, valid de renvoyer true si l'input est validé-->
+  <p class="errorInput" ng-show="personForm.name.$dirty&&personForm.name.$error.pattern">Entrez un nom correct</p> <!--error pattern renvoie true si le pattern n'est pas vérifié dans l'input-->
+
+  <label>Email: </label><input type="text" name="email" ng-model="email" ng-pattern="/^[a-zA-Z0-9.!#$%’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required />
+  <p class="validInput" ng-show="personForm.email.$dirty&&personForm.email.$valid">L'adresse mail est bonne</p>
+  <p class="errorInput" ng-show="personForm.email.$dirty&&personForm.email.$error.pattern">Entrer une bonne adresse email</p>
+
+  <label>Sujet: </label><input type="text" name="subject" ng-model="subject" ng-pattern="/^[a-zA-Z-,;:() 0-9éèêîïôö]+$/" required />
+  <p class="validInput" ng-show="personForm.subject.$dirty&&personForm.subject.$valid">Le sujet est valide</p>
+  <p class="errorInput" ng-show="personForm.subject.$dirty&&personForm.subject.$error.pattern">Entrez un sujet correct</p>
+
+  <label>Texte: </label><input type="textarea" name="text" ng-model="text" ng-pattern="/^[a-zA-Z-,;:() 0-9éèêîïôö]+$/" required />
+  <p class="validInput" ng-show="personForm.text.$dirty&&personForm.text.$valid">Le texte est valide</p>
+  <p class="errorInput" ng-show="personForm.text.$dirty&&personForm.text.$error.pattern">Entrez un texte correct</p>
+  <button type="button" name="button" ng-click="clickedButton()">Valider</button>
+  <div ng-repeat='subject in mailarray'>
+      <!-- Au click envoie à l'url email + le $index qui défini la position dans le tableau -->
+      <a href="#!/email/{{$index}}" class="open">{{subject.subject}}</a>
+  </div>
+</form>

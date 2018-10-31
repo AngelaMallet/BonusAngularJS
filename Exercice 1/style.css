@@ -1,0 +1,13 @@
+.green{
+  height: 330px;
+  width: 330px;
+  background: green;
+}
+.red{
+  height: 330px;
+  width: 330px;
+  background: red;
+}
+body{
+  background-color: lightgrey;
+}

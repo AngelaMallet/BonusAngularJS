@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>AngularJS Bonus</title>
+  <link href="style.css" rel="stylesheet" media="all" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body>
+    <!-- le nom du formaulaire est:personForm -->
+  <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
+    <form name="personForm" novalidate ng-submit="personForm.$valid && sendForm()">
+      <!--pattern requis pour le formulaire  -->
+      Email : <input type="text" name="email" ng-model="txtmail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{1,}$/" required />
+      <!-- si dans le formulaire personForm l'input email est valide alors, une div de class green apparait -->
+      <div style="color:green" ng-show="personForm.email.$valid"class="green"></div>
+      <!-- si dans le formilaire l'input email est non valide alors la div de class red apparait -->
+      <div ng-show="personForm.email.$dirty&&personForm.email.$error.pattern"class="red"></div>
+      <br /><br />
+      <!-- Au clic du bouton envoyer une alerte apparaît -->
+      <button onclick="alert('Merci !');">Envoyer</button><br /><br />
+      <span>{{msg}}</span>
+    </form>
+  </div>
+  <script type="text/javascript">
+  var app = angular.module('ngpatternApp', []);
+  app.controller('ngpatternCtrl', function ($scope) {
+    $scope.sendForm = function () {
+      $scope.msg = "A bientôt";
+    };
+  });
+</script>
+</body>
+</html>

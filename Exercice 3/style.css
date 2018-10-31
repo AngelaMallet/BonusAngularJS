@@ -1,0 +1,9 @@
+.validInput {
+  color: green;
+}
+.errorInput{
+  color: red;
+}
+#subjectAppear {
+  font-weight: bolder;
+}

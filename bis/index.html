@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr"  ng-app="ngpatternApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Bonus bis</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div ng-controller="ngpatternCtrl">
+    <!-- novalidate = Pas de validation dans le HTML -->
+    <!-- ng-submit = pareil que ng-click sauf que c'est pour un form avec bouton submit, ne pas mettre ng-submit + ng-click car conflit -->
+    <!-- $valid = validation du formulaire au bouton submit -->
+    <!-- sendForm() = envoi la fonction au click sur le bouton submit -->
+    <form name="personForm" novalidate ng-submit="personForm.$valid && sendForm()">
+      <!-- NOM -->
+      <!-- ng-model = permet de déclarer une valeur lier au HTML grâce aux input, textarea ou select -->
+      <!-- ng-pattern = permet de contrôler ce qui est écrit avec une regex -->
+      <!-- required = champs requis // ici ça ne fonctionne pas mais permet de dire que le champ est obligatoire pour le référencement -->
+      <label for="name">Nom : </label><input type="text" name="name" id="name" ng-model="txtName" ng-pattern="/^[A-Za-zàâäéèêëîïùûüÀÂÄÊËÎÏÛÜ -]+$/" required />
+      <!-- ng-show = montre la valeur que si ce qu'il y a dedans est validé grâce au ng-pattern -->
+      <div class="green" ng-show="personForm.name.$valid"> OK ! </div>
+      <!-- $dirty = permet de dire une erreur si la valeur dans l'input à été modifié -->
+      <!-- $error = détermine l'erreur par rapport au pattern -->
+      <div class="red" ng-show="personForm.name.$dirty&&personForm.name.$error.pattern">Seulement les lettres et caractères spéciaux (-) sont autorisés</div>
+      <!-- EMAIL -->
+      <label for="email">Email : </label><input type="text" name="email" id="email" ng-model="txtMail" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required />
+      <div class="green" ng-show="personForm.email.$valid"> OK ! </div>
+      <div class="red" ng-show="personForm.email.$dirty&&personForm.email.$error.pattern">Ne correspond pas au format standard d'une adresse Email !</div>
+      <!-- SUJET -->
+      <label for="sujbject">Sujet : </label><input id="sujbject" type="text" name="sujbject" ng-model="txtSubject" ng-pattern="/^[0-9A-Za-zàâäéèêëîïùûüÀÂÄÊËÎÏÛÜ -.!?:;,]+$/" required />
+      <div class="green" ng-show="personForm.sujbject.$valid"> OK ! </div>
+      <div class="red" ng-show="personForm.sujbject.$dirty&&personForm.sujbject.$error.pattern">Seulement les lettres, nombres et caractères spéciaux (-.!?:;,) sont autorisés</div>
+      <!-- TEXTE -->
+      <label for="text">Texte : </label><textarea type="text" name="text" id="text" ng-model="txtText" ng-pattern="/^[0-9A-Za-zàâäçéèêëîïùûüÀÂÄÊËÎÏÛÜ -,. !?():;']+$/" required /></textarea>
+      <div class="green" ng-show="personForm.text.$valid"> OK ! </div>
+      <div class="red" ng-show="personForm.text.$dirty&&personForm.text.$error.pattern">Le champs ne peut pas être vide !</div>
+      <button type="submit" name="submit">Bouton</button>
+      <div>
+        <div ng-click="show=true" ng-model="lienSubject" id="lienSubject" name="lienSubject">{{msg}}</div>
+        <div name="infos" ng-show="show">NOM : {{txtName}}</div>
+        <div name="infos" ng-show="show">Adrese mail : {{txtMail}}</div>
+        <div name="infos" ng-show="show">Texte : {{txtText}}</div>
+      </div>
+    </form>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
